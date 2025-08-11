@@ -1,13 +1,14 @@
+
 # Advanced Mind Map Application
 
-A modern, collaborative mind mapping application built with React, TypeScript, and InstantDB. Create, organize, and visualize your ideas with real-time collaboration and advanced features.
+A modern, collaborative mind mapping application built with React, TypeScript, and the latest Lovable framework. Create, organize, and visualize your ideas with real-time collaboration and advanced features.
 
 ![Mind Map Demo](https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop)
 
 ## ✨ Features
 
 ### Core Functionality
-- **Interactive Canvas** - Infinite zoomable canvas with smooth panning and grid
+- **Interactive Canvas** - Infinite zoomable canvas with smooth panning and dotted grid
 - **Node Management** - Create, edit, delete, and organize nodes with drag & drop
 - **Smart Connections** - Connect nodes with beautiful bezier curves and arrows
 - **Hierarchical Structure** - Parent-child relationships with visual inheritance
@@ -25,6 +26,7 @@ A modern, collaborative mind mapping application built with React, TypeScript, a
 - **Node Styling** - Custom colors, shapes (rectangle, rounded, pill)
 - **Text Formatting** - Bold, italic, underline, strikethrough, font sizes
 - **Connection Styles** - Solid/dashed lines with optional arrows
+- **Zoom-Aware Grid** - Dotted grid background that adapts to zoom level
 - **Responsive Design** - Works seamlessly on desktop and mobile
 
 ## 🚀 Quick Start
@@ -45,6 +47,12 @@ npm install
 
 # Start development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Build for development (with source maps)
+npm run build:dev
 ```
 
 ### Environment Setup
@@ -88,18 +96,24 @@ VITE_INSTANT_APP_ID=your-instant-app-id
 ### Tech Stack
 - **Frontend**: React 18, TypeScript, Tailwind CSS
 - **Backend**: InstantDB (real-time database)
-- **Build Tool**: Vite
+- **Build Tool**: Vite with Lovable framework
 - **Icons**: Lucide React
 - **Notifications**: React Hot Toast
+
+### Latest Lovable Features
+- **Component Tagging** - Enhanced development experience with lovable-tagger
+- **Path Aliases** - Clean @/ imports for better code organization
+- **Advanced TypeScript** - Strict type checking with path mapping
+- **Development Mode** - Optimized builds for debugging
 
 ### Project Structure
 ```
 src/
 ├── components/          # React components
-│   ├── Canvas.tsx      # Main canvas component
+│   ├── Canvas.tsx      # Main canvas with dotted grid
 │   ├── Node.tsx        # Individual node component
 │   ├── Auth.tsx        # Authentication
-│   └── ...
+│   └── ui/             # Shadcn UI components
 ├── hooks/              # Custom React hooks
 ├── types/              # TypeScript type definitions
 ├── utils/              # Utility functions
@@ -107,25 +121,40 @@ src/
 └── App.tsx             # Main application component
 ```
 
-### Data Flow
-1. **State Management** - React useState for local state
-2. **Real-time Sync** - InstantDB handles data persistence and collaboration
-3. **Canvas Rendering** - HTML5 Canvas for connections, DOM for nodes
-4. **Event Handling** - Custom event system for drag & drop operations
-
-## 🔧 Development
-
-### Available Scripts
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
+### Build Commands
+- `npm run dev` - Development server with hot reload
+- `npm run build` - Production build (optimized)
+- `npm run build:dev` - Development build (with source maps)
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
+
+## 🎨 Visual Features
+
+### Dotted Grid Background
+- Zoom-aware grid that adjusts density based on scale
+- Themed grid dots that respond to light/dark mode
+- Smooth performance during pan/zoom operations
+- CSS-based rendering for optimal performance
+
+### Enhanced Theming
+- Semantic color tokens from design system
+- HSL color format for consistent theming
+- CSS custom properties for runtime theme switching
+- Component-level theme inheritance
+
+## 🔧 Development
 
 ### Code Style
 - TypeScript strict mode enabled
 - ESLint with React hooks rules
-- Tailwind CSS for styling
-- Functional components with hooks
+- Path aliases (@/) for clean imports
+- Tailwind CSS semantic tokens
+
+### Component Development
+- Focused, single-responsibility components
+- Custom hooks for reusable logic
+- Proper TypeScript types throughout
+- Shadcn UI component system
 
 ## 🗺️ Roadmap
 
@@ -145,6 +174,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
+- [Lovable](https://lovable.dev) for the development framework
 - [InstantDB](https://instantdb.com) for real-time database
 - [Lucide](https://lucide.dev) for beautiful icons
 - [Tailwind CSS](https://tailwindcss.com) for styling

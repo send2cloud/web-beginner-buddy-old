@@ -1,5 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import { useMindMapManager } from './hooks/useMindMapManager';
 import { Canvas } from './components/Canvas';
 import Node from './components/Node';
@@ -10,14 +11,11 @@ import { HelpPanel } from './components/HelpPanel';
 import { MiniToolbar } from './components/MiniToolbar';
 import { ContextMenu } from './components/ContextMenu';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
-import { useDragAndDrop } from './hooks/useDragAndDrop';
-import { Point } from './types';
 
 const MindMapApp: React.FC<{ mindMapManager: ReturnType<typeof useMindMapManager> }> = ({ mindMapManager }) => {
   const {
     state,
     connectionStyle,
-    setConnectionStyle,
     selectedNodeIds,
     getMiniToolbarPosition,
     updateNode,
@@ -126,10 +124,8 @@ const MindMapApp: React.FC<{ mindMapManager: ReturnType<typeof useMindMapManager
             nodes={state.nodes}
             onGroupUpdate={handleGroupUpdate}
             onNodesUpdate={(nodeUpdates) => {
-              setState(prev => ({
-                ...prev,
-                nodes: { ...prev.nodes, ...nodeUpdates }
-              }));
+              // Fix: Use proper state update pattern
+              mindMapManager.updateMultipleNodes(nodeUpdates);
             }}
             onGroupSelect={handleGroupSelect}
             isSelected={selectedGroupId === group.id}
