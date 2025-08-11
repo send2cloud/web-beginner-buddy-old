@@ -1,13 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect } from "react";
 
 const Index = () => {
+  useEffect(() => {
+    document.title = "Hello World";
+    const description = "Simple Hello World page built with React and Tailwind.";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", description);
+
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const href = window.location.href;
+    if (canonical) {
+      canonical.setAttribute("href", href);
+    } else {
+      const link = document.createElement("link");
+      link.setAttribute("rel", "canonical");
+      link.setAttribute("href", href);
+      document.head.appendChild(link);
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main className="min-h-screen flex items-center justify-center bg-background">
+      <section className="text-center space-y-4">
+        <h1 className="text-5xl font-bold tracking-tight">Hello World</h1>
+        <p className="text-lg text-muted-foreground">
+          A minimal page rendered with React + Vite.
+        </p>
+      </section>
+    </main>
   );
 };
 
