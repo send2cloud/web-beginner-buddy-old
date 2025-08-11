@@ -280,7 +280,7 @@ export const Canvas: React.FC<CanvasProps> = ({
       ref={containerRef}
       className={`relative w-full h-full overflow-hidden cursor-grab ${
         isPanning ? 'cursor-grabbing' : ''
-      } ${theme === 'dark' ? 'bg-background' : 'bg-background'}`}
+      } ${theme === 'dark' ? 'dark:bg-gray-900 bg-gray-900' : 'bg-gray-50'}`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
