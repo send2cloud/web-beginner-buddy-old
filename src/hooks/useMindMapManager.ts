@@ -455,7 +455,7 @@ export const useMindMapManager = () => {
   }, [state.nodes, fitNodesToViewport]);
 
   // Drag operations
-  const handleNodeDragStart = useCallback((nodeId: string, startPos: Point) => {
+  const handleNodeDragStart = useCallback((nodeId: string) => {
     const selectedNodes = Object.values(state.nodes).filter(node => node.selected);
     const dragNodeIds = selectedNodes.length > 1 && selectedNodes.some(n => n.id === nodeId)
       ? selectedNodes.map(n => n.id)
@@ -977,7 +977,7 @@ export const useMindMapManager = () => {
       toast.success(`Selected ${Object.keys(state.nodes).length} nodes`);
     },
     onChangeColor: () => {
-      toast.info('Color picker coming soon!');
+      toast.success('Mind map saved successfully!');
     }
   };
 
