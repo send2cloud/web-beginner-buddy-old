@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useMindMapManager } from './hooks/useMindMapManager';
 import { Canvas } from './components/Canvas';
@@ -11,6 +12,7 @@ import { HelpPanel } from './components/HelpPanel';
 import { MiniToolbar } from './components/MiniToolbar';
 import { ContextMenu } from './components/ContextMenu';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
+import Version2 from './pages/Version2';
 
 const MindMapApp: React.FC<{ mindMapManager: ReturnType<typeof useMindMapManager> }> = ({ mindMapManager }) => {
   const {
@@ -228,6 +230,17 @@ const MindMapApp: React.FC<{ mindMapManager: ReturnType<typeof useMindMapManager
 };
 
 function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainApp />} />
+        <Route path="/v2" element={<Version2 />} />
+      </Routes>
+    </Router>
+  );
+}
+
+function MainApp() {
   const mindMapManager = useMindMapManager();
 
   return (
