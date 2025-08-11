@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Sun, Moon, Download, Upload, RotateCcw, ZoomIn, ZoomOut, Save, ChevronDown, ChevronUp, Bold, Italic, Underline, Strikethrough, Minus, Plus, Square, Circle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sun, Moon, Download, Upload, RotateCcw, ZoomIn, ZoomOut, Save, ChevronDown, ChevronUp, Bold, Italic, Underline, Strikethrough, Minus, Plus, Square, Circle, GripVertical } from 'lucide-react';
 import { COLORS } from '../utils/constants';
+import { useDraggablePosition } from '../hooks/useDraggablePosition';
 
 interface UnifiedToolbarProps {
   theme: 'light' | 'dark';
@@ -34,6 +35,35 @@ export const UnifiedToolbar: React.FC<UnifiedToolbarProps> = ({
   onGlobalShapeChange,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Calculate viewport bounds for dragging constraints
+  const [viewportBounds, setViewportBounds] = useState({
+    left: 0,
+    top: 0,
+    right: window.innerWidth - 320, // Toolbar width approximately 320px
+    bottom: window.innerHeight - 100 // Minimum space from bottom
+  });
+
+  // Update bounds on window resize
+  useEffect(() => {
+    const updateBounds = () => {
+      setViewportBounds({
+        left: 0,
+        top: 0,
+        right: Math.max(0, window.innerWidth - 320),
+        bottom: Math.max(0, window.innerHeight - 100)
+      });
+    };
+
+    window.addEventListener('resize', updateBounds);
+    return () => window.removeEventListener('resize', updateBounds);
+  }, []);
+
+  const { position, isDragging, elementRef, dragHandleProps } = useDraggablePosition({
+    initialPosition: { x: window.innerWidth - 336, y: 16 }, // Default top-right with some margin
+    storageKey: 'unifiedToolbar-position',
+    bounds: viewportBounds
+  });
 
   const handleImportClick = () => {
     const input = document.createElement('input');
@@ -49,11 +79,39 @@ export const UnifiedToolbar: React.FC<UnifiedToolbarProps> = ({
   };
 
   return (
-    <div className={`absolute top-4 right-4 z-10 rounded-lg shadow-lg border transition-all duration-300 ${
-      theme === 'dark' 
-        ? 'bg-gray-800 border-gray-600' 
-        : 'bg-white border-gray-200'
-    }`}>
+    <div 
+      ref={elementRef}
+      className={`absolute z-10 rounded-lg shadow-lg border transition-all duration-300 select-none ${
+        isDragging ? 'shadow-xl scale-105' : ''
+      } ${
+        theme === 'dark' 
+          ? 'bg-gray-800 border-gray-600' 
+          : 'bg-white border-gray-200'
+      }`}
+      style={{
+        left: position.x,
+        top: position.y,
+        transform: isDragging ? 'scale(1.02)' : 'scale(1)'
+      }}
+    >
+      {/* Drag Handle */}
+      <div
+        {...dragHandleProps}
+        className={`flex items-center justify-center w-full py-1 border-b ${
+          theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
+        } ${
+          isDragging ? 'bg-opacity-20' : 'hover:bg-opacity-10'
+        } transition-colors`}
+        title="Drag to move toolbar"
+      >
+        <GripVertical 
+          size={16} 
+          className={`${
+            theme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+          } hover:text-opacity-80`} 
+        />
+      </div>
+
       {/* Minimized View - Always Visible */}
       <div className="flex items-center gap-2 p-2">
         {/* Essential Controls */}
