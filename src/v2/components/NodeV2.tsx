@@ -157,10 +157,13 @@ export const NodeV2: React.FC<NodeV2Props> = ({
             onChange={handleTextChange}
             onKeyDown={handleTextKeyDown}
             onBlur={() => setIsEditing(false)}
-            className="w-full h-full resize-none border-none outline-none bg-transparent text-center"
+            className="w-full h-full resize-none border-none outline-none bg-transparent text-center flex items-center justify-center"
             style={{
               fontSize: `${node.style.fontSize}px`,
-              color: node.style.textColor
+              color: node.style.textColor,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
             autoFocus
           />
