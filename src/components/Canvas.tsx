@@ -161,7 +161,7 @@ export const Canvas: React.FC<CanvasProps> = ({
     const offsetX = canvas.offset.x % scaledSpacing;
     const offsetY = canvas.offset.y % scaledSpacing;
 
-    ctx.fillStyle = theme === 'dark' ? '#4B5563' : '#D1D5DB';
+    ctx.fillStyle = theme === 'dark' ? 'hsl(215 20.2% 65.1%)' : 'hsl(215.4 16.3% 46.9%)';
     
     for (let x = offsetX; x < rect.width; x += scaledSpacing) {
       for (let y = offsetY; y < rect.height; y += scaledSpacing) {
@@ -280,7 +280,7 @@ export const Canvas: React.FC<CanvasProps> = ({
       ref={containerRef}
       className={`relative w-full h-full overflow-hidden cursor-grab ${
         isPanning ? 'cursor-grabbing' : ''
-      } ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'}`}
+      } ${theme === 'dark' ? 'bg-background' : 'bg-background'}`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}

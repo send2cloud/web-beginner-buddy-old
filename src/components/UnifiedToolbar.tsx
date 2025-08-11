@@ -85,8 +85,8 @@ export const UnifiedToolbar: React.FC<UnifiedToolbarProps> = ({
         isDragging ? 'shadow-xl scale-105' : ''
       } ${
         theme === 'dark' 
-          ? 'bg-gray-800 border-gray-600' 
-          : 'bg-white border-gray-200'
+          ? 'bg-card border-border' 
+          : 'bg-card border-border'
       }`}
       style={{
         left: position.x,
@@ -98,7 +98,7 @@ export const UnifiedToolbar: React.FC<UnifiedToolbarProps> = ({
       <div
         {...dragHandleProps}
         className={`flex items-center justify-center w-full py-1 border-b ${
-          theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
+          theme === 'dark' ? 'border-border' : 'border-border'
         } ${
           isDragging ? 'bg-opacity-20' : 'hover:bg-opacity-10'
         } transition-colors`}
@@ -107,7 +107,7 @@ export const UnifiedToolbar: React.FC<UnifiedToolbarProps> = ({
         <GripVertical 
           size={16} 
           className={`${
-            theme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+            theme === 'dark' ? 'text-muted-foreground' : 'text-muted-foreground'
           } hover:text-opacity-80`} 
         />
       </div>
@@ -119,8 +119,8 @@ export const UnifiedToolbar: React.FC<UnifiedToolbarProps> = ({
           onClick={onZoomOut}
           className={`p-2 rounded-md transition-colors hover:bg-opacity-80 ${
             theme === 'dark'
-              ? 'text-gray-300 hover:bg-gray-700'
-              : 'text-gray-600 hover:bg-gray-100'
+              ? 'text-foreground hover:bg-muted'
+              : 'text-foreground hover:bg-muted'
           }`}
           title="Zoom Out"
         >
@@ -128,7 +128,7 @@ export const UnifiedToolbar: React.FC<UnifiedToolbarProps> = ({
         </button>
 
         <span className={`text-sm font-mono px-2 ${
-          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+          theme === 'dark' ? 'text-foreground' : 'text-foreground'
         }`}>
           {Math.round(scale * 100)}%
         </span>
@@ -137,15 +137,15 @@ export const UnifiedToolbar: React.FC<UnifiedToolbarProps> = ({
           onClick={onZoomIn}
           className={`p-2 rounded-md transition-colors hover:bg-opacity-80 ${
             theme === 'dark'
-              ? 'text-gray-300 hover:bg-gray-700'
-              : 'text-gray-600 hover:bg-gray-100'
+              ? 'text-foreground hover:bg-muted'
+              : 'text-foreground hover:bg-muted'
           }`}
           title="Zoom In"
         >
           <ZoomIn size={18} />
         </button>
 
-        <div className={`w-px h-6 ${theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300'}`} />
+        <div className={`w-px h-6 ${theme === 'dark' ? 'bg-border' : 'bg-border'}`} />
 
         <button
           onClick={onThemeToggle}
