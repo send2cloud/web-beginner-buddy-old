@@ -124,8 +124,10 @@ const MindMapApp: React.FC<{ mindMapManager: ReturnType<typeof useMindMapManager
             nodes={state.nodes}
             onGroupUpdate={handleGroupUpdate}
             onNodesUpdate={(nodeUpdates) => {
-              // Fix: Use proper state update pattern
-              mindMapManager.updateMultipleNodes(nodeUpdates);
+              // Update multiple nodes by calling updateNode for each
+              Object.entries(nodeUpdates).forEach(([nodeId, updates]) => {
+                updateNode(nodeId, updates);
+              });
             }}
             onGroupSelect={handleGroupSelect}
             isSelected={selectedGroupId === group.id}
