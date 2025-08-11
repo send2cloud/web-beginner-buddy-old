@@ -52,7 +52,7 @@ const Node: React.FC<NodeProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(node.editing);
   const [editValue, setEditValue] = useState(node.content);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const nodeRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState<Point>({ x: 0, y: 0 });
@@ -283,19 +283,22 @@ const Node: React.FC<NodeProps> = ({
     const rect = nodeRef.current?.getBoundingClientRect();
     if (!rect) return;
 
-    const screenPos = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    // Screen position calculation for potential future use
+    // const screenPos = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     
     // Handle files dropped on node
     if (e.dataTransfer.files.length > 0) {
       // Create child nodes for files dropped on this node
-      Array.from(e.dataTransfer.files).forEach((file, index) => {
-        const childPosition = {
-          x: node.position.x + 250,
-          y: node.position.y + (node.children.length + index) * 100 + 100
-        };
+      Array.from(e.dataTransfer.files).forEach((file) => {
+        // Child position calculation for potential future use
+        // const childPosition = {
+        //   x: node.position.x + 250,
+        //   y: node.position.y + (node.children.length + index) * 100 + 100
+        // };
         
         if (file.type.startsWith('image/')) {
-          const url = URL.createObjectURL(file);
+          // URL creation for potential future use
+          // const url = URL.createObjectURL(file);
           // This would need to be passed as a prop or handled differently
           // For now, we'll trigger the child creation through the existing mechanism
           onCreateChild(node.id);

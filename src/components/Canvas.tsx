@@ -6,8 +6,7 @@ const drawConnections = (
   ctx: CanvasRenderingContext2D,
   nodes: Record<string, NodeData>,
   canvas: CanvasState,
-  defaultConnectionStyle: { type: 'solid' | 'dashed' },
-  theme: 'light' | 'dark'
+  defaultConnectionStyle: { type: 'solid' | 'dashed' }
 ) => {
   ctx.lineWidth = 3;
   ctx.lineCap = 'round';
@@ -166,16 +165,13 @@ export const Canvas: React.FC<CanvasProps> = ({
     
     for (let x = offsetX; x < rect.width; x += scaledSpacing) {
       for (let y = offsetY; y < rect.height; y += scaledSpacing) {
-        ctx.beginPath();
-        ctx.arc(x, y, 1, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillRect(x - 0.5, y - 0.5, 1, 1);
       }
     }
 
     // Draw connections
-    drawConnections(ctx, nodes, canvas, defaultConnectionStyle, theme);
-  }
-  );
+    drawConnections(ctx, nodes, canvas, defaultConnectionStyle);
+  }, [canvas, nodes, theme, defaultConnectionStyle]);
 
   useEffect(() => {
     drawGrid();

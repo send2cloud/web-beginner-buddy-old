@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bold, Italic, Underline, Strikethrough, Trash2, Link, Users, Minus, Plus, Square, Circle, MoreHorizontal } from 'lucide-react';
+import { Bold, Italic, Underline, Strikethrough, Trash2, Users, Minus, Plus, Square, Circle, MoreHorizontal } from 'lucide-react';
 import { COLORS } from '../utils/constants';
 import { useDynamicToolbarPosition } from '../hooks/useDynamicToolbarPosition';
 import { ToolbarButton } from './shared/ToolbarButton';
@@ -31,7 +31,6 @@ export const MiniToolbar: React.FC<MiniToolbarProps> = ({
   onFontSizeChange,
   onShapeChange,
   onConnectionStyleChange,
-  getConnectionStyle,
   onDelete,
   onConnect,
   onGroup,
@@ -45,9 +44,7 @@ export const MiniToolbar: React.FC<MiniToolbarProps> = ({
   });
 
   // Get current connection style between the two selected nodes
-  const currentConnectionStyle = selectedCount === 2 && selectedNodes.length === 2
-    ? getConnectionStyle(selectedNodes[0], selectedNodes[1])
-    : { type: 'solid' as const };
+  // Note: currentConnectionStyle is available but not used in current implementation
 
   // Get the most common shape among selected nodes
   const getSelectedShape = (): 'rectangle' | 'rounded' | 'pill' | null => {
