@@ -43,6 +43,10 @@ export interface GroupData {
     width: number;
     height: number;
   };
+  style: {
+    backgroundColor: string;
+    borderColor: string;
+  };
 }
 
 export interface CanvasState {

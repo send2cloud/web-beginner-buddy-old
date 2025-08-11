@@ -1,10 +1,9 @@
 
-import { Node } from '../types';
+import { NodeData } from '../types';
 
 export const updateMultipleNodes = (
-  nodes: Record<string, Node>,
-  updates: Record<string, Partial<Node>>,
-  updateNodeFn: (nodeId: string, updates: Partial<Node>) => void
+  updates: Record<string, Partial<NodeData>>,
+  updateNodeFn: (nodeId: string, updates: Partial<NodeData>) => void
 ) => {
   Object.entries(updates).forEach(([nodeId, nodeUpdates]) => {
     updateNodeFn(nodeId, nodeUpdates);

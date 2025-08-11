@@ -220,7 +220,11 @@ export const useMindMapManager = () => {
     const newGroup: GroupData = {
       id: groupId,
       nodeIds: selectedNodes.map(node => node.id),
-      bounds
+      bounds,
+      style: {
+        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+        borderColor: '#A855F7'
+      }
     };
 
     setState(prev => ({
@@ -525,7 +529,7 @@ export const useMindMapManager = () => {
         y: position.y + index * 20
       };
 
-      const parentId = targetNodeId || state.activeNodeId;
+      const parentId = targetNodeId || state.activeNodeId || undefined;
 
       if (file.type.startsWith('image/')) {
         const url = URL.createObjectURL(file);
@@ -540,7 +544,7 @@ export const useMindMapManager = () => {
 
   // Handle text/URL drops
   const handleTextDrop = useCallback((text: string, position: Point, targetNodeId?: string) => {
-    const parentId = targetNodeId || state.activeNodeId;
+    const parentId = targetNodeId || state.activeNodeId || undefined;
     
     // Check if it's a URL
     const urlPattern = /^(https?:\/\/|www\.)/i;
